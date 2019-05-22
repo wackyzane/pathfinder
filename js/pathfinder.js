@@ -45,7 +45,7 @@ function create_skills() {
         ["Survival", "Wis"],
         ["Swim", "Str"],
         ["Use Magic Device", "Cha"],
-        ["Class Skill    * Trained only"]
+        ["Class Skill    * Trained only",""]
     ];
     let start = [
         "",
@@ -71,6 +71,15 @@ function create_skills() {
         "ranks",
         "miscMod"
     ];
+
+    let stat = [
+        "str",
+        "dex",
+        "con",
+        "int",
+        "wis",
+        "cha"
+    ]
 
     // Makes all the rows and column for the skills
     // Making each row in the skills
@@ -122,10 +131,14 @@ function create_skills() {
                     }
                 } else if (normal[j] == "abilityMod") {
                     let textNode = document.createTextNode("");
-                    if (skills[i][1] == "Str") {
-                        td.setAttribute("class", "strMod");
+
+                    if (stat.indexOf(skills[i][1].toLowerCase()) != -1) {
+                        let x = stat.indexOf(skills[i][1].toLowerCase());
+                        td.setAttribute("class",stat[x]+"Mod");
                         console.log(td);
                     }
+                    
+
                     add_Text(tr, td, textNode);
                 } else if (normal[j] == "stats") {
                     let textNode = document.createTextNode("=" + skills[i][1]);
@@ -149,6 +162,7 @@ function add_Text(tr, td, textChild) {
     skillTable[0].appendChild(tr);
 }
 
+// This changes the stats shown in the ability modifier section of the skills and stats tables when a stat is changed
 function statChange(stat) {
     var statScore = document.getElementsByName(stat+"Score")[0].value;
     let statMod = Math.floor(statScore / 2) - 5;
