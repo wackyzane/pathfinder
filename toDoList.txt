@@ -1,0 +1,8 @@
+Add Names to all inputs
+Plan out the Database
+More css to make everything look better
+
+Skill Total for Each Skill:
+    Make a Variable that adds or subtracts everytime an input on the same row is changed.
+    Whether that be Ranks, Misc Mod., Ability Mod, or the Checkbox Input.
+    
