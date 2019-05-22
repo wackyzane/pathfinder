@@ -45,7 +45,7 @@ function create_skills() {
         ["Survival", "Wis"],
         ["Swim", "Str"],
         ["Use Magic Device", "Cha"],
-        ["Class Skill    * Trained only"]
+        ["Class Skill    * Trained only",""]
     ];
     let start = [
         "",
@@ -71,6 +71,15 @@ function create_skills() {
         "ranks",
         "miscMod"
     ];
+
+    let stat = [
+        "str",
+        "dex",
+        "con",
+        "int",
+        "wis",
+        "cha"
+    ]
 
     // Makes all the rows and column for the skills
     // Making each row in the skills
@@ -122,10 +131,14 @@ function create_skills() {
                     }
                 } else if (normal[j] == "abilityMod") {
                     let textNode = document.createTextNode("");
-                    if (skills[i][1] == "Str") {
-                        td.setAttribute("class", "strMod");
+
+                    if (stat.indexOf(skills[i][1].toLowerCase()) != -1) {
+                        let x = stat.indexOf(skills[i][1].toLowerCase());
+                        td.setAttribute("class",stat[x]+"Mod");
                         console.log(td);
                     }
+                    
+
                     add_Text(tr, td, textNode);
                 } else if (normal[j] == "stats") {
                     let textNode = document.createTextNode("=" + skills[i][1]);
@@ -149,50 +162,11 @@ function add_Text(tr, td, textChild) {
     skillTable[0].appendChild(tr);
 }
 
-function strChange() {
-    let strScore = document.getElementsByName("strScore")[0].value;
-    let strMod = Math.floor(strScore / 2) - 5;
-    for (let i = 0; i < document.getElementsByClassName("strMod").length; i++) {
-        document.getElementsByClassName("strMod")[i].innerHTML = strMod;
-    }
-}
-
-function dexChange() {
-    var dexScore = document.getElementsByName("dexScore")[0].value;
-    let dexMod = Math.floor(dexScore / 2) - 5;
-    for (let i = 0; i < document.getElementsByClassName("strMod").length; i++) {
-        document.getElementsByClassName(abilityMod + "Mod")[i].innerHTML = strMod;
-    }
-}
-
-function conChange() {
-    var conScore = document.getElementsByName("conScore")[0].value;
-    let conMod = Math.floor(conScore / 2) - 5;
-    for (let i = 0; i < document.getElementsByClassName("strMod").length; i++) {
-        document.getElementsByClassName("strMod")[i].innerHTML = strMod;
-    }
-}
-
-function intChange() {
-    var intScore = document.getElementsByName("intScore")[0].value;
-    let intMod = Math.floor(intScore / 2) - 5;
-    for (let i = 0; i < document.getElementsByClassName("strMod").length; i++) {
-        document.getElementsByClassName("strMod")[i].innerHTML = strMod;
-    }
-}
-
-function wisChange() {
-    var wisScore = document.getElementsByName("wisScore")[0].value;
-    let wisMod = Math.floor(wisScore / 2) - 5;
-    for (let i = 0; i < document.getElementsByClassName("strMod").length; i++) {
-        document.getElementsByClassName("strMod")[i].innerHTML = strMod;
-    }
-}
-
-function chaChange() {
-    var chaScore = document.getElementsByName("chaScore")[0].value;
-    let chaMod = Math.floor(chaScore / 2) - 5;
-    for (let i = 0; i < document.getElementsByClassName("strMod").length; i++) {
-        document.getElementsByClassName("strMod")[i].innerHTML = strMod;
+// This changes the stats shown in the ability modifier section of the skills and stats tables when a stat is changed
+function statChange(stat) {
+    var statScore = document.getElementsByName(stat+"Score")[0].value;
+    let statMod = Math.floor(statScore / 2) - 5;
+    for (let i = 0; i < document.getElementsByClassName(stat+"Mod").length; i++) {
+        document.getElementsByClassName(stat+"Mod")[i].innerHTML = statMod;
     }
 }
